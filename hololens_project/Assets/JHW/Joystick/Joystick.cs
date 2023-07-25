@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
-{
+public class Joystick : MonoBehaviour { 
     float x, y;
     Vector3 originPos;
 
@@ -25,52 +24,25 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(Vector3.Normalize(Joystick_Button.transform.position - Joystick_UI.transform.position));
+        if (isDragging) // 조이스틱 드래깅 상태일때 실행
+        {
+            // 벡터 정규화
+            Vector2 normalizedVector = Joystick_Button.transform.position - Joystick_UI.transform.position;
+            normalizedVector.Normalize();
 
-        Vector2 normalizedVector = Joystick_Button.transform.position - Joystick_UI.transform.position;
-        normalizedVector.Normalize();
+            // 조이스틱 머리부분 clamp
+            Vector2 vec = Joystick_Button.transform.localPosition - Joystick_UI.transform.localPosition;
+            vec = Vector2.ClampMagnitude(vec, .04f);
+            Joystick_Button.transform.localPosition = vec;
 
-        Vector2 vec = Joystick_Button.transform.localPosition - Joystick_UI.transform.localPosition;
-        Debug.Log(vec);
-        vec = Vector2.ClampMagnitude(vec, .04f);
-        Joystick_Button.transform.localPosition = vec;
-
+            // 플레이어 이동, 조이스틱에서 손 놓은 상태면 움직임 멈춤
+            //if (!isDragging) { Player.Instance.MovePlayerJoystick(0, 0); return; }
+            Player.Instance.MovePlayerJoystick(normalizedVector.x, normalizedVector.y);
+        }
+        
+        // 조이스틱 스틱 부분 lineRenderer
         lineRenderer.SetPosition(0, Joystick_UI.transform.position);
-        lineRenderer.SetPosition(1,Joystick_Button.transform.position);
-
-        //Player.Instance.MovePlayer(normalizedVector.x, normalizedVector.y);
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        x += eventData.delta.x * Time.deltaTime * 100;  
-        y += eventData.delta.y * Time.deltaTime * 100;
-
-        x = Mathf.Clamp(x, -50f, 50f);
-        y = Mathf.Clamp(y, -50f, 50f);
-
-
-        Vector2 vec = new Vector2(x, y);
-        float distance = 50f;// Vector2.Distance(originPos, vec);
-
-        vec = Vector2.ClampMagnitude(vec, distance);
-        this.transform.localPosition = vec;
-
-        //Player.Instance.MovePlayerJoystick(x, y);
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        //Debug.Log("down");
-
-        x = y = 0;
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        //Player.Instance.isJoyStickDown = false;
-        this.transform.position = originPos;
-        x = y = 0;
+        lineRenderer.SetPosition(1, Joystick_Button.transform.position);
     }
 
     public void OnDrag(GameObject _obj)
