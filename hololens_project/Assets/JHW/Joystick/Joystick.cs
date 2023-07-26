@@ -54,5 +54,11 @@ public class Joystick : MonoBehaviour {
     {
         Joystick_Button.transform.localPosition = Vector3.zero;
         isDragging = false;
+        Player.Instance.isJoyStickDown = false;
+    }
+
+    public void JumpButton()
+    {
+        Player.Instance.PlayerJump();
     }
 }

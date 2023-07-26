@@ -8,11 +8,14 @@ public class Player : MonoBehaviour
 
     [SerializeField] float playerSpeed;
     [SerializeField] float rotateSpeed;
+    [SerializeField] GameObject playerModel;
 
     private static Player instance = null;
     float joyStickX;
     float joyStickY;
-    bool isJoyStickDown = false;
+    
+    public bool isJoyStickDown = false;
+    public bool isJumping = false;
 
     Animator ani;
 
@@ -35,7 +38,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        ani = this.GetComponent<Animator>();
+        ani = playerModel.GetComponent<Animator>();
     }
 
     private void Update()
@@ -49,14 +52,14 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotateSpeed);
 
             // 플레이어 애니메이션
-            //ani.SetBool("walk", true);
+            if (!isJumping) ani.SetBool("walk", true);
         }
         else
         {
-            //ani.SetBool("walk", false);
+            if (!isJumping) ani.SetBool("walk", false);
         }
 
-        isJoyStickDown = false;
+
     }
 
     public void MovePlayerJoystick(float x, float y)
@@ -64,5 +67,24 @@ public class Player : MonoBehaviour
         isJoyStickDown = true;
         joyStickX = x;
         joyStickY = y;
+    }
+
+    public void PlayerJump()
+    {
+        if (isJumping) return;
+
+        ani.SetBool("jump", true);
+        isJumping = true;
+    }
+
+    public void Player_JumpStart()
+    {
+        playerModel.GetComponent<Rigidbody>().AddForce(new Vector3(0, 3f, 0));
+    }
+
+    public void Player_JumpEnd()
+    {
+        ani.SetBool("jump", false);
+        isJumping = false;
     }
 }
