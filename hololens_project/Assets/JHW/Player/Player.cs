@@ -17,7 +17,8 @@ public class Player : MonoBehaviour
     public bool isJoyStickDown = false;
     public bool isJumping = false;
 
-    Animator ani;
+    public Animator ani;
+    public CapsuleCollider col;
 
     public static Player Instance
     {
@@ -39,10 +40,14 @@ public class Player : MonoBehaviour
     private void Start()
     {
         ani = playerModel.GetComponent<Animator>();
+        col = GetComponent<CapsuleCollider>();
     }
 
     private void Update()
     {
+        // 게임오버 됬으면 실행 X
+        if (GameManager.Instance.isGameOver) return;
+
         if (isJoyStickDown)
         {
             Vector3 dir = new Vector3(joyStickX, 0, joyStickY);
@@ -79,11 +84,13 @@ public class Player : MonoBehaviour
 
     public void Player_JumpStart()
     {
+        playerModel.GetComponent<Rigidbody>().drag = 2f;
         playerModel.GetComponent<Rigidbody>().AddForce(new Vector3(0, 3f, 0));
     }
 
     public void Player_JumpEnd()
     {
+        playerModel.GetComponent<Rigidbody>().drag = 40f;
         ani.SetBool("jump", false);
         isJumping = false;
     }
