@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] float playerSpeed;
     [SerializeField] float rotateSpeed;
     [SerializeField] GameObject playerModel;
+    [SerializeField] GameObject particle;
 
     private static Player instance = null;
     float joyStickX;

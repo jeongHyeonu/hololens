@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         bulletSpeed = Random.Range(0.1f, 0.3f);
+        this.transform.LookAt(Player.Instance.transform.position);
         diff = Player.Instance.transform.position - rb.transform.position;
         diff.Normalize();
         diff.y = 0;

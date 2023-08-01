@@ -2094,7 +2094,7 @@ MonoBehaviour:
   trackedHandedness: 3
   trackedHandJoint: 2
   transformOverride: {fileID: 0}
-  additionalOffset: {x: 0.1, y: 0, z: 0}
+  additionalOffset: {x: 0.1, y: 0.2, z: 0.1}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
 --- !u!1 &648153037
@@ -5238,7 +5238,7 @@ MonoBehaviour:
   trackedHandedness: 3
   trackedHandJoint: 2
   transformOverride: {fileID: 0}
-  additionalOffset: {x: -0.1, y: 0, z: 0}
+  additionalOffset: {x: -0.1, y: 0.2, z: 0.1}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
 --- !u!4 &1653378966
@@ -5642,7 +5642,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1b88b83f0985b9846bfdca7d443eea84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
