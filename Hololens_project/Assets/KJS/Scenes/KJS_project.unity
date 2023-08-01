@@ -27282,7 +27282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   findDistance: 8
-  colliderDistance: 1
+  colliderDistance: 1.5
   collisionState: 0
   moveDistance: 20
 --- !u!1 &1755522021
@@ -29151,7 +29151,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 3
+  m_Height: 2.6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1838759896
@@ -29251,7 +29251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e8bb99dfa364b4389a3a296bd93664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 7
   rotateSpeed: 5
   col: {fileID: 0}
   isJoyStickDown: 0
