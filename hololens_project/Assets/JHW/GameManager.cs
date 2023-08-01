@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameStart_ui;
     [SerializeField] GameObject play_ui;
     [SerializeField] GameObject gameOver_ui;
+    [SerializeField] PlayFabLogin playFab;
 
     [SerializeField] TextMeshProUGUI scoreText;
 
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
         bulletManager.ShootBulletEnd();
         Player.Instance.ani.SetBool("Died", true);
         Player.Instance.col.height = 0.3f;
+        playFab.SetScore(score);
     }
 
     public void ScoreIncrease()
