@@ -8,7 +8,7 @@ public class GameManager_Maze : MonoBehaviour
 {
 
 
-    // 게임 상태 UI 오브젝트 변수
+    // 게임 오브젝트 변수
     public GameObject gameLabel;
     public GameObject gamePlay_ui;
     public GameObject gameRestart_ui;
@@ -22,9 +22,9 @@ public class GameManager_Maze : MonoBehaviour
     // 게임 상태 UI 텍스트 컴포넌트 변수
     Text gameText;
 
-    public float finishLine = 1.5f;
+    public float finishLine = 3.5f;
 
-    // 게임 상태 변수
+    // 게임 상태 상수
     public enum GameState
     {
         Ready,
@@ -37,8 +37,9 @@ public class GameManager_Maze : MonoBehaviour
     // 현재 게임 상태 변수
     public GameState gState;
 
-    // PlayerMove 클래스 변수
+    // EnemyFSM 클래스 변수
     EnemyFSM enemy;
+    // PlayerMove 클래스 변수
     PlayerMove playerMove;
 
     IEnumerator ReadyToStart()
@@ -72,12 +73,6 @@ public class GameManager_Maze : MonoBehaviour
         // 초기 게임 상태는 준비 상태로 설정한다.
         gState = GameState.Ready;
         gamePlay_ui.SetActive(true);
-        gamePlay_ui.transform.Translate(10, -3, -215);
-        gamePlay_ui.transform.Rotate(12, -10, -190);
-        
-        
-
-        
 
         // 게임 상태 UI 오브젝트에서 Text 컴포넌트를 가져온다.
         gameText = gameLabel.GetComponent<Text>();
@@ -90,10 +85,6 @@ public class GameManager_Maze : MonoBehaviour
 
         // 게임 준비-> 게임 중 상태로 전환하기
         StartCoroutine(ReadyToStart());
-
-        
-
-
 
         // 플레이어 오브젝트를 찾은 후 플레이어의 PlayerMove 컴포넌트 받아오기
         playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
