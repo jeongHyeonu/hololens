@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class GameManager_Maze : MonoBehaviour
 {
 
-    // 싱글턴 변수
-    public static GameManager_Maze gm;
 
     // 게임 상태 UI 오브젝트 변수
     public GameObject gameLabel;
@@ -23,14 +21,6 @@ public class GameManager_Maze : MonoBehaviour
 
     // 게임 상태 UI 텍스트 컴포넌트 변수
     Text gameText;
-
-    private void Awake()
-    {
-        if (gm == null)
-        {
-            gm = this;
-        }
-    }
 
     public float finishLine = 1.5f;
 
