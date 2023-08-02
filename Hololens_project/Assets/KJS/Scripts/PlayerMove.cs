@@ -43,6 +43,11 @@ public class PlayerMove : MonoBehaviour
         joyStickX = x;
         joyStickY = y;
     }
+    
+    public void stop()
+    {
+        isJoyStickDown = false;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -73,9 +78,8 @@ public class PlayerMove : MonoBehaviour
         else
         {
             // 이동 블랜드 트리 호출
-            anim.SetFloat("MoveMotion", 0);
+            anim.SetFloat("MoveMotion", 0f);
         }
-
 
     }
 }
