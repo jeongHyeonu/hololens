@@ -44,24 +44,25 @@ public class GameManager_Maze : MonoBehaviour
 
     IEnumerator ReadyToStart()
     {
-        
-        // 2초간 대기한다.
+
+        // 1초간 대기한다.
         yield return new WaitForSeconds(1.0f);
         mainCam.Rotate(90, 90, 0);
-        
+
+        // 2초간 대기한다.
         yield return new WaitForSeconds(2.0f);
-        
         gamePlay_ui.transform.Rotate(12, -10, -190);
-        // 상태 텍스트의 내용을 'Go!'로 한다.
+
+        // 상태 텍스트의 내용 'Go!' 변경
         gameText.text = "Go!";
 
-        // 0.5초간 대기한다.
+        // 0.5초간 대기
         yield return new WaitForSeconds(0.5f);
 
-        // 상태 텍스트를 비활성화 한다.
+        // 상태 텍스트를 비활성화
         gameLabel.SetActive(false);
 
-        // 상태를 '게임 중' 상태로 변경한다.
+        // 상태를 '게임 중' 상태로 변경
         gState = GameState.Run;
     }
 
@@ -70,20 +71,23 @@ public class GameManager_Maze : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 초기 게임 상태는 준비 상태로 설정한다.
+        // 초기 게임 상태는 준비 상태로 설정
         gState = GameState.Ready;
-        gamePlay_ui.SetActive(true);
+        
 
-        // 게임 상태 UI 오브젝트에서 Text 컴포넌트를 가져온다.
+        // 게임 상태 UI 오브젝트에서 Text 컴포넌트 가져오기
         gameText = gameLabel.GetComponent<Text>();
 
-        // 상태 텍스트의 내용을 'Ready...'로 한다.
+        // 상태 텍스트의 내용을 'Ready...'로 변경
         gameText.text = "Ready...";
 
-        // 상태 텍스트의 색상을 주황색으로 한다.
+        // 상태 텍스트의 색상을 주황색으로 변경
         gameText.color = new Color32(255, 185, 0, 255);
 
-        // 게임 준비-> 게임 중 상태로 전환하기
+        // 조이스틱 활성화
+        gamePlay_ui.SetActive(true);
+
+        // 게임 준비-> 게임 중 상태로 전환
         StartCoroutine(ReadyToStart());
 
         // 플레이어 오브젝트를 찾은 후 플레이어의 PlayerMove 컴포넌트 받아오기
@@ -108,16 +112,16 @@ public class GameManager_Maze : MonoBehaviour
             // 상태 텍스트를 활성화
             gameLabel.SetActive(true);
 
-            // 상태 텍스트의 내용을 'Game Over'로 한다.
+            // 상태 텍스트의 내용을 'Game Over'로 변경
             gameText.text = "Game Over";
 
-            // 상태 텍스트의 색상을 붉은색으로 한다.
+            // 상태 텍스트의 색상을 붉은색으로 변경
             gameText.color = new Color32(255, 0, 0, 255);
 
-            // 버튼 오브젝트를 활성화 한다.
+            // 버튼 오브젝트를 활성화
             gameRestart_ui.gameObject.SetActive(true);
 
-            // 상태를 '게임 오버' 상태로 변경한다.
+            // 상태를 '게임 오버' 상태로 변경
             gState = GameState.GameOver;
         }
 
@@ -130,16 +134,16 @@ public class GameManager_Maze : MonoBehaviour
 
             // 상태 텍스트를 활성화
             gameLabel.SetActive(true);
-            // 상태 텍스트의 내용을 'Game Over'로 한다.
+            // 상태 텍스트의 내용을 'Game Over'로 변경
             gameText.text = "You Win";
 
-            // 상태 텍스트의 색상을 파란색으로 한다.
+            // 상태 텍스트의 색상을 파란색으로 변경
             gameText.color = new Color32(0, 0, 255, 255);
 
-            // 버튼 오브젝트를 활성화 한다.
+            // 버튼 오브젝트를 활성화
             gameRestart_ui.gameObject.SetActive(true);
 
-            // 상태를 '게임 오버' 상태로 변경한다.
+            // 상태를 '게임 오버' 상태로 변경
             gState = GameState.Finish;
         }
     }

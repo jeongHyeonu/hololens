@@ -36,8 +36,7 @@ public class JoyStick_Maze : MonoBehaviour
             vec = Vector2.ClampMagnitude(vec, .04f);
             Joystick_Button.transform.localPosition = vec;
 
-            // 플레이어 이동, 조이스틱에서 손 놓은 상태면 움직임 멈춤
-            //if (!isDragging) { Player.Instance.MovePlayerJoystick(0, 0); return; }
+            // 조이스틱의 움직임(좌표값)을 PlayerMove의 MovePlayerJoystick()함수에 전달
             PlayerMove.Instance.MovePlayerJoystick(normalizedVector.x, normalizedVector.y);
         }
 
@@ -58,5 +57,4 @@ public class JoyStick_Maze : MonoBehaviour
         PlayerMove.Instance.isJoyStickDown = false;
     }
 
-  
 }
